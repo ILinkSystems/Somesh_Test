@@ -1,0 +1,134 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 pd0-LR">
+            <div class="deviceContainer">
+                <div class="deviceHeader clearfix">
+                    <a href="javascript:;" class="float-left">
+                        <img class="deviceLogo" src="assets/images/theme-dark/logo-bloct-v2-white.png">
+                    </a>
+                    <!-- <div class="float-right">
+
+                  </div> -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown text-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="assets/images/theme-light/button-hamburgermenu-white.png">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:;">Manage Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:;" (click)="logout()">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="addDeviceHead clearfix">
+                    <h4 class="float-left">Devices</h4>
+                    <a href="javascript:;" class="float-right" (click)="addDevice()">
+                        <img src="assets/images/theme-light/button-adddevice.png"> Add Device
+                    </a>
+                    <!--Add Device Form-->
+                    <div class="addDeviceForm" *ngIf="showPopup">
+                        <form>
+                            <div class="clearfix">
+                                <label>Add Device</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Device Type</label>
+                                <select class="form-control" [(ngModel)]="selectedDeviceType" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let deviceType of deviceTypes" [ngValue]="deviceType">{{deviceType.typeName}}</option>
+                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Device Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="deviceName" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="form-group" *ngIf="selectedDeviceType?.id !== 3">
+                                <label>API Key</label>
+                                <input type="text" class="form-control" [(ngModel)]="apiKey" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" (click)="saveNewDevice()">Save</button>
+                                <button type="submit" class="btn btn-primary" (click)="showPopup = false">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--Add Device Form Ends Here-->
+                </div>
+                <ul class="listGroup">
+                    <li class="listItem active clearfix" [class.active]="selectedIdx === i" *ngFor="let device of apiService.devices;let i = index" (click)="selectDevice(i, device)">
+                        <div>
+                            <img src="assets/images/theme-light/icon-device-nest-camera.png">
+                        </div>
+                        <div class="detailsWrap float-left">
+                            <div class="detailLine title">
+                                <div class="left">
+                                    <h5>{{device.deviceName}}</h5>
+                                </div>
+                                <div class="right">
+                                    <img src="assets/images/theme-light/button-menuellipsis.png">
+                                </div>
+                            </div>
+                            <div class="detailLine desc">
+                                <div class="left">
+                                    <p>Additional identifiying Text e.g. Bedroom SW, Gate 17</p>
+                                </div>
+                                <div class="right">
+
+                                </div>
+                            </div>
+                            <div class="detailLine precauition">
+                                <div class="left">
+                                    <a href="javascript:;" class="risk">At Risk</a>
+                                </div>
+                                <div class="right">
+                                    <img class="riskIcon" src="assets/images/theme-light/badge-atrisk.png">
+                                </div>
+                            </div>
+                            <div class="routeIcon clearfix" *ngIf="selectedIdx === i">
+                                <ul>
+                                    <li (click)="onLocateOnMap(device)" *ngIf="device.deviceTypeId !== 3">
+                                        <img src="assets/images/theme-light/icon-locatedevice.png">
+                                        <span>Locate on Map</span>
+                                    </li>
+                                    <li (click)="onViewDetails(device)">
+                                        <img src="assets/images/theme-light/icon-deviceinfo.png">
+                                        <span>View Details</span>
+                                    </li>
+                                    <li (click)="onViewBlockChain(device)">
+                                        <img src="assets/images/theme-light/icon-viewblockchain.png">
+                                        <span>View Blockchain</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 pd0-LR">
+            <agm-map [latitude]="lat" [longitude]="lng" style="height: 100vh" *ngIf="showMap">
+                <agm-marker *ngFor="let device of apiService.devices; let i = index" [latitude]="device.location?.lat" [longitude]="device.location?.lon">
+                    <agm-snazzy-info-window [maxWidth]="50" [closeWhenOthersOpen]="true">
+                        <ng-template>
+                            {{device.deviceName}}
+                        </ng-template>
+                    </agm-snazzy-info-window>
+                </agm-marker>
+            </agm-map>
+            <iframe style="height: 100vh; width:100%" *ngIf="showIframe" [src]="arloSiteUrl"></iframe>
+        </div>
+    </div>
+</section>

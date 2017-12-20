@@ -1,0 +1,36 @@
+
+.loginBody{
+    height: 100vh;
+    width: 100%;
+    background-color: #e8e8e8;
+}
+.logoContainer{
+    margin: 40px 0px;
+}
+.loginContainer{
+    background-color: #fff;
+}
+.loginContainer ul{
+    border: 0px !important;
+}
+.loginContainer ul li{
+    width: 50%;
+    text-align: center;
+}
+.loginContainer ul li a{
+    border:0px !important; 
+    background: #dcdcde !important;
+    color: #484280;
+    border-radius: 0px !important;
+}
+.loginContainer ul li a.active{
+    border: 0px !important;
+    background: #484280 !important;
+    color:#fff !important;
+}
+.loginContainer .tab-content{
+    padding: 15px;
+}
+.help{
+    color: #fc9700;
+}

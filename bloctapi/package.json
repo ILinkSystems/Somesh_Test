@@ -1,0 +1,27 @@
+{
+  "name": "sampleapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.1.0",
+    "mongodb": "^2.0.55",
+    "mongoose": "^4.13.6",
+    "morgan": "~1.8.1",
+    "nest-api": "0.0.8",
+    "node-arlo-api": "^1.0.2",
+    "node-blink-security": "^1.2.2",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2",
+    "solc": "^0.4.18",
+    "web3": "github:ethereum/web3.js"
+  }
+}
