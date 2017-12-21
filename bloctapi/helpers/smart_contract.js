@@ -1,7 +1,8 @@
 var express = require('express'),
     fs = require('fs'),
     solc = require('solc'),
-    Web3 = require('web3');
+    // Web3 = require('web3');
+//commit
 //const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 const input = fs.readFileSync('contracts/devicemetadata.sol');
 const output = solc.compile(input.toString(), 1);
